@@ -8,6 +8,7 @@ library(rpivotTable)
 library(tidytext)
 library(DT)
 library(reshape2)
+library(wordcloud)
 
 shinyUI(navbarPage(theme = shinytheme("simplex"),
                    
@@ -20,6 +21,10 @@ shinyUI(navbarPage(theme = shinytheme("simplex"),
                                               multiple = FALSE),
                                     fileInput("import1", "Choose MSD File (txt)",
                                               multiple = FALSE),
+                                    selectInput("ou_list", "Choose Operating Unit",
+                                                choices = NULL),
+                                    selectInput("indicator_list", "Choose Indicator",
+                                                choices = NULL),
                                     actionButton("display","Analyze!")),
                        mainPanel(
                          tags$h1("Narratives Triangulation Tool"),
@@ -49,7 +54,9 @@ shinyUI(navbarPage(theme = shinytheme("simplex"),
                    navbarMenu("Narratives",
                               tabPanel("Narratives Explorer",
                                        DT::dataTableOutput('narrativesdt')),
-                              tabPanel("Narrative Trends")
+                              tabPanel("Narrative Trends"),
+                              tabPanel("Resources",
+                                       DT::dataTableOutput('bingdt'))
                    ),
                    navbarMenu("Narrative Analysis",
                               tabPanel("Sentiment Analysis",
