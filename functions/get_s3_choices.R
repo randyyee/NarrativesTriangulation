@@ -11,7 +11,7 @@ get_s3_choices <- function(type)
   svc <- secretsmanager()
   
   see <- svc$get_secret_value(
-    SecretId = "system_narratives_1AOdf2WRb7-Aac56I"
+    SecretId = "system_narratives_1AOdf2WRb7"
   )
   
   see <- fromJSON(see$SecretString)
