@@ -8,13 +8,13 @@ get_s3_choices <- function(type)
   Sys.setenv(AWS_PROFILE = "AWS-SANDBOX-SYSTEM_NARRATIVES", AWS_DEFAULT_REGION = "us-east-2",
              AWS_REGION = "us-east-2")
   
-  svc <- secretsmanager()
+  svc <- paws::secretsmanager()
   
   see <- svc$get_secret_value(
     SecretId = "system_narratives_1AOdf2WRb7"
   )
   
-  see <- fromJSON(see$SecretString)
+  see <- jsonlite::fromJSON(see$SecretString)
   
   
   Sys.setenv(AWS_ACCESS_KEY_ID = see$aws_access_key, 
